@@ -1,17 +1,27 @@
 module Ant.Element.Icon exposing
-    ( Attribute
-    , SvgIcon
-    , customIcon
-    , customIconBase
-    , fill
-    , height
-    , rotate
-    , spin
-    , style
-    , styleNode
-    , twoToneColor
-    , width
+    ( Attribute, SvgIcon, customIcon
+    , fill, height, width, rotate, spin, style, twoToneColor
+    , customIconBase, styleNode
     )
+
+{-|
+
+
+# Basics
+
+@docs Attribute, SvgIcon, customIcon
+
+
+# Attributes
+
+@docs fill, height, width, rotate, spin, style, twoToneColor
+
+
+# Utils
+
+@docs customIconBase, styleNode
+
+-}
 
 import Element exposing (Color, Element, el, html)
 import Element.Font as Font
@@ -20,6 +30,7 @@ import Html.Attributes
 import Svg.Attributes
 
 
+{-| -}
 type Attribute msg
     = Spin
     | Rotate Float
@@ -30,6 +41,7 @@ type Attribute msg
     | TwoToneColor Color
 
 
+{-| -}
 type alias SvgIcon msg =
     List (Html.Attribute msg) -> Html msg
 
@@ -57,11 +69,14 @@ defaultProps =
     }
 
 
+{-| -}
 customIcon : List (Attribute msg) -> SvgIcon msg -> Element msg
 customIcon =
     customIconBase {}
 
 
+{-| -}
+customIconBase : {} -> List (Attribute msg) -> SvgIcon msg -> Element msg
 customIconBase theme attrs svgIcon =
     let
         props =
@@ -119,36 +134,43 @@ customIconBase theme attrs svgIcon =
 -- ATTRIBUTES
 
 
+{-| -}
 spin : Attribute msg
 spin =
     Spin
 
 
+{-| -}
 rotate : Float -> Attribute msg
 rotate =
     degrees >> Rotate
 
 
+{-| -}
 width : Int -> Attribute msg
 width =
     Width
 
 
+{-| -}
 height : Int -> Attribute msg
 height =
     Height
 
 
+{-| -}
 fill : Color -> Attribute msg
 fill =
     Fill
 
 
+{-| -}
 style : List ( String, String ) -> Attribute msg
 style =
     Style
 
 
+{-| -}
 twoToneColor : Color -> Attribute msg
 twoToneColor =
     TwoToneColor
@@ -158,6 +180,7 @@ twoToneColor =
 -- STYLE
 
 
+{-| -}
 styleNode : Html msg
 styleNode =
     let

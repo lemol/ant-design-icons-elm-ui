@@ -71,8 +71,12 @@ import Ant.Element.Icon exposing (Attribute, customIcon)
         ? `(Ant.Element.Icon.spin :: attrs)`
         : 'attrs';
 
+      const iconDef = (allIconDefs as any)[svgIdentifier];
+      const svgString = prepareSvgString(helpers.renderIconDefinitionToSVGElement(iconDef));
+      const svgEncoded = encodeURIComponent(svgString);
+
       return `
-{-| ${svgIdentifier}
+{-| ![${svgIdentifier}](data:image/svg+xml,${svgEncoded} "${svgIdentifier} preview")
 -}
 ${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
 ${camelCase(svgIdentifier)} attrs =
