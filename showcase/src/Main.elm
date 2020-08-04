@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Element exposing (Element)
+import Html exposing (Html)
 import Stories
 import UIExplorer exposing (UIExplorerProgram, defaultConfig, explore, storiesOf)
 
@@ -24,8 +25,12 @@ stories =
             )
 
 
-viewIcons : List (Element msg) -> Element msg
+viewIcons : List (Element msg) -> Html msg
 viewIcons items =
-    Element.wrappedRow
-        []
-        items
+    let
+        element =
+            Element.wrappedRow
+                []
+                items
+    in
+    Element.layout [] element

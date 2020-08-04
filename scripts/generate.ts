@@ -34,33 +34,15 @@ function walk<T>(
 }
 
 async function generateIcons() {
-  const iconsDir = path.join(__dirname, '../src/Ant/Icons');
-  try {
-    await promisify(fs.access)(iconsDir);
-  } catch (err) {
-    await promisify(fs.mkdir)(iconsDir);
-  }
-
-  const render = template(`
--- GENERATE BY ./scripts/generate.ts
--- DO NOT EDIT IT MANUALLY
-<%= elmModuleBody %>
-`.trim());
-
   const withErrors = [] as string[];
 
+  // guess if the Icon exists in lemol/ant-design-icons-elm
   await walk(async ({ svgIdentifier, ...iconDef }) => {
     try {
       const svgString = helpers.renderIconDefinitionToSVGElement(iconDef);
       const parsed = await SvgParser.parseSvg(prepareSvgString(svgString));
 
-      const elmModuleBody = elmModuleToString(parsed.toElm(`Ant.Icons.${svgIdentifier}`));
-
-      // generate icon file
-      await writeFile(
-        path.resolve(__dirname, `../src/Ant/Icons/${svgIdentifier}.elm`),
-        render({ elmModuleBody }),
-      );
+      elmModuleToString(parsed.toElm(`Ant.Icons.${svgIdentifier}`));
     } catch(error) {
       withErrors.push(svgIdentifier);
     }
@@ -77,17 +59,19 @@ async function generateIcons() {
     .map(camelCase)
     .join('\n  , ');
 
-  const imports = withSuccess
-    .map(svgIdentifier => `import Ant.Icons.${svgIdentifier}`)
-    .join('\n');
+  const imports = `
+import Ant.Icons
+import Element exposing (Element)
+import Ant.Icon exposing (Attribute, customIcon)
+  `;
 
   const decls = withSuccess
     .map(svgIdentifier => `
 {-| ${svgIdentifier}
 -}
-${camelCase(svgIdentifier)} : List (Html.Attribute msg) -> Html msg
-${camelCase(svgIdentifier)} =
-    Ant.Icons.${svgIdentifier}.viewWithAttributes
+${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
+${camelCase(svgIdentifier)} attrs =
+    customIcon attrs Ant.Icons.${camelCase(svgIdentifier)}
     `)
     .join('\n\n');
 
@@ -112,19 +96,18 @@ ${camelCase(svgIdentifier)} =
     .join('\n');
 
   await promisify(fs.appendFile)(
-    path.resolve(__dirname, '../src/Ant/Icons.elm'),
+    path.resolve(__dirname, '../src/Ant/Element/Icons.elm'),
     `
 -- GENERATE BY ./scripts/generate.ts
 -- DO NOT EDIT IT MANUALLY
-module Ant.Icons exposing
+module Ant.Element.Icons exposing
   ( ${exposingList}
   )
 
-{-| List of Ant Design icons
+{-| List of Ant Design icons for Elm UI
 ${docs}
 -}
 
-import Html exposing (Html)
 ${imports}
 
 ${decls}
