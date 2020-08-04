@@ -12,8 +12,8 @@ export async function generateStories(withSuccess: string[]) {
 
   const imports = `
 import Element exposing (Element)
-import Ant.Element.Icons
-import Ant.Icon exposing (width, height)
+import Ant.Element.Icons as Icons
+import Ant.Element.Icon exposing (width, height)
 `;
 
   const types = `
@@ -44,21 +44,21 @@ type alias Category msg =
         .map(x => `${x}Outlined`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Ant.Element.Icons.${x} [width 64, height 64]`)
+        .map(x => `Icons.${x} [width 64, height 64]`)
         .join(', ');
 
       const filled = category.items
         .map(x => `${x}Filled`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Ant.Element.Icons.${x} [width 64, height 64]`)
+        .map(x => `Icons.${x} [width 64, height 64]`)
         .join(', ');
 
       const twoTone = category.items
         .map(x => `${x}TwoTone`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Ant.Element.Icons.${x} [width 64, height 64]`)
+        .map(x => `Icons.${x} [width 64, height 64]`)
         .join(', ');
 
       return `

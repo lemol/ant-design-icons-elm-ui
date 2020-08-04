@@ -7,7 +7,7 @@
   "license": "MIT",
   "assetsPath": "showcase/public/assets/",
   "scripts": {
-    "generate": "rimraf src/Ant/Element/Icons.elm showcase/src/Stories.elm && mkdir -p src/Ant/Element && node -r ts-node/register scripts/generate.ts --target=icon",
+    "generate": "rimraf src/Ant/Element/Icons.elm showcase/src/Stories.elm && node -r ts-node/register scripts/generate.ts --target=icon",
     "format": "elm-format --yes src/ showcase/",
     "build": "npm run generate && npm run format",
     "docs": "elm make --docs=docs.json",

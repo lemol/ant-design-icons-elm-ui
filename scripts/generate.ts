@@ -62,17 +62,23 @@ async function generateIcons() {
   const imports = `
 import Ant.Icons
 import Element exposing (Element)
-import Ant.Icon exposing (Attribute, customIcon)
+import Ant.Element.Icon exposing (Attribute, customIcon)
   `;
 
   const decls = withSuccess
-    .map(svgIdentifier => `
+    .map(svgIdentifier => {
+      const attrs = svgIdentifier === 'LoadingOutlined'
+        ? `(Ant.Element.Icon.spin :: attrs)`
+        : 'attrs';
+
+      return `
 {-| ${svgIdentifier}
 -}
 ${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
 ${camelCase(svgIdentifier)} attrs =
-    customIcon attrs Ant.Icons.${camelCase(svgIdentifier)}
-    `)
+    customIcon ${attrs} Ant.Icons.${camelCase(svgIdentifier)}
+    `;
+    })
     .join('\n\n');
 
   const docs = (Object.keys(categories) as CategoriesKeys[])

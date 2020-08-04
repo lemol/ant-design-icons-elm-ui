@@ -1,4 +1,4 @@
-module Ant.Icon exposing
+module Ant.Element.Icon exposing
     ( Attribute
     , SvgIcon
     , customIcon
@@ -8,12 +8,15 @@ module Ant.Icon exposing
     , rotate
     , spin
     , style
+    , styleNode
     , twoToneColor
     , width
     )
 
 import Element exposing (Color, Element, el, html)
+import Element.Font as Font
 import Html exposing (Html)
+import Html.Attributes
 import Svg.Attributes
 
 
@@ -33,7 +36,7 @@ type alias SvgIcon msg =
 
 type alias Props =
     { spin : Bool
-    , rotate : Float
+    , rotate : Maybe Float
     , width : Maybe Int
     , height : Maybe Int
     , fill : Maybe Color
@@ -45,7 +48,7 @@ type alias Props =
 defaultProps : Props
 defaultProps =
     { spin = False
-    , rotate = 0
+    , rotate = Nothing
     , width = Nothing
     , height = Nothing
     , fill = Nothing
@@ -60,14 +63,59 @@ customIcon =
 
 
 customIconBase theme attrs svgIcon =
-    html <| svgIcon [Svg.Attributes.width "64", Svg.Attributes.height "64"]
+    let
+        props =
+            fromAttributes attrs
+
+        -- default to 1em. 1em = (base font-size)px
+        -- https://www.w3schools.com/tags/ref_pxtoemconversion.asp
+        width_ =
+            props.width
+                |> Maybe.withDefault (1 * 14)
+
+        height_ =
+            props.width
+                |> Maybe.withDefault (1 * 14)
+
+        spin_ =
+            if props.spin then
+                [ Html.Attributes.style "animation" "loadingCircle 1s infinite linear"
+                ]
+
+            else
+                []
+
+        fill_ =
+            props.fill
+                |> Maybe.map Font.color
+                |> Maybe.map List.singleton
+                |> Maybe.withDefault []
+
+        rotate_ =
+            props.rotate
+                |> Maybe.map Element.rotate
+                |> Maybe.map List.singleton
+                |> Maybe.withDefault []
+
+        svgAttributes =
+            [ Svg.Attributes.width "1em"
+            , Svg.Attributes.height "1em"
+            , Svg.Attributes.fill "currentColor"
+            ]
+                ++ spin_
+
+        elAttributes =
+            [ Font.size <| max width_ height_
+            ]
+                ++ rotate_
+                ++ fill_
+    in
+    el
+        elAttributes
+        (html <| svgIcon svgAttributes)
 
 
 
---Element.text "OK"
---el
---[]
---(html <| svgIcon [])
 -- ATTRIBUTES
 
 
@@ -78,7 +126,7 @@ spin =
 
 rotate : Float -> Attribute msg
 rotate =
-    Rotate
+    degrees >> Rotate
 
 
 width : Int -> Attribute msg
@@ -107,6 +155,32 @@ twoToneColor =
 
 
 
+-- STYLE
+
+
+styleNode : Html msg
+styleNode =
+    let
+        stylesheet =
+            """
+@-webkit-keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+            """
+    in
+    Html.node "style" [] [ Html.text stylesheet ]
+
+
+
 -- INTERNAL
 
 
@@ -119,7 +193,7 @@ fromAttributes =
                     { acc | spin = True }
 
                 Rotate x ->
-                    { acc | rotate = x }
+                    { acc | rotate = Just x }
 
                 Width x ->
                     { acc | width = Just x }

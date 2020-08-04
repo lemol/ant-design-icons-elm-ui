@@ -45,7 +45,7 @@ module Ant.Element.Icons exposing
 
 -}
 
-import Ant.Icon exposing (Attribute, customIcon)
+import Ant.Element.Icon exposing (Attribute, customIcon)
 import Ant.Icons
 import Element exposing (Element)
 
@@ -3232,7 +3232,7 @@ loading3QuartersOutlined attrs =
 -}
 loadingOutlined : List (Attribute msg) -> Element msg
 loadingOutlined attrs =
-    customIcon attrs Ant.Icons.loadingOutlined
+    customIcon (Ant.Element.Icon.spin :: attrs) Ant.Icons.loadingOutlined
 
 
 {-| LockFilled
