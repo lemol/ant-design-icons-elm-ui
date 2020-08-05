@@ -8,6 +8,7 @@ import { promisify } from 'util';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { template } from 'lodash';
 import SvgParser from 'svg-to-elm';
+import svgToDataURL from 'svg-to-dataurl';
 import elmModuleToString from 'svg-to-elm/lib/src/elm-module-to-string';
 import categories, { Categories, CategoriesKeys } from './categories';
 import { generateStories } from './generate-showcase';
@@ -73,10 +74,10 @@ import Ant.Element.Icon exposing (Attribute, customIcon)
 
       const iconDef = (allIconDefs as any)[svgIdentifier];
       const svgString = prepareSvgString(helpers.renderIconDefinitionToSVGElement(iconDef));
-      const svgEncoded = encodeURIComponent(svgString);
+      const svgEncoded = svgToDataURL(svgString.replace("<svg", '<svg width="24"'));
 
       return `
-{-| ![${svgIdentifier}](data:image/svg+xml,${svgEncoded} "${svgIdentifier} preview")
+{-| ![${svgIdentifier}](${svgEncoded} "${svgIdentifier} preview")
 -}
 ${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
 ${camelCase(svgIdentifier)} attrs =

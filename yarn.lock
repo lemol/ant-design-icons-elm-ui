@@ -5300,6 +5300,11 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
+svg-to-dataurl@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/svg-to-dataurl/-/svg-to-dataurl-1.0.0.tgz#343f21a5dc3e051ae413c590cf478b7cf7a5f070"
+  integrity sha512-WrPB9vdd4RO0BjcPN6NJ9ofj3Zt8de16TJZ+JVJ4LnE2OKNGz+HjgGv6rE5Hp3s+OnM56X9i64mfJDU9uf4ZqQ==
+
 svg-to-elm@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/svg-to-elm/-/svg-to-elm-0.6.0.tgz#9a9f678376601ce2f5cc239a3a25327411d71b2c"
