@@ -3,8 +3,8 @@ module PlayStories exposing (examples)
 import Ant.Element.Icon exposing (fill, height, rotate, spin, width)
 import Ant.Element.Icons as Icons
 import Element exposing (Element)
+import Html exposing (Html)
 import UIExplorer exposing (UI, storiesOf)
-import Utils exposing (viewIcons)
 
 
 examples : List (UI {} () {})
@@ -42,9 +42,25 @@ basicItems =
         [ width size
         , height size
         , rotate 180
+        , fill (Element.rgb 1 0 1)
         ]
     , Icons.loadingOutlined
         [ width size
         , height size
         ]
     ]
+
+
+viewIcons : List (Element msg) -> Html msg
+viewIcons items =
+    let
+        element =
+            Element.row
+                [ Element.spacing 6 ]
+                items
+    in
+    Html.div
+        []
+        [ Ant.Element.Icon.styleNode
+        , Element.layout [] element
+        ]

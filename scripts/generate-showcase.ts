@@ -8,20 +8,25 @@ const writeFile = promisify(fs.writeFile);
 
 export async function generateStories(withSuccess: string[]) {
   // generate icon stories
-  const exposingList = 'allCategories';
+  const exposingList = 'ShowIcon, Category, allCategories';
 
   const imports = `
-import Element exposing (Element)
-import Ant.Element.Icons as Icons
 import Ant.Element.Icon exposing (width, height)
+import Ant.Element.Icons as Icons
+import Element exposing (Element)
 `;
 
   const types = `
+type alias ShowIcon msg =
+  { name : String
+  , view : Element msg
+  }
+
 type alias Category msg =
   { name : String
-  , outlined : List (Element msg)
-  , filled : List (Element msg)
-  , twoTone : List (Element msg)
+  , outlined : List (ShowIcon msg)
+  , filled : List (ShowIcon msg)
+  , twoTone : List (ShowIcon msg)
   }
   `;
 
@@ -44,21 +49,27 @@ type alias Category msg =
         .map(x => `${x}Outlined`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Icons.${x} [width 64, height 64]`)
+        .map(x => `{ name = "${x}"
+                   , view = Icons.${x} [width 36, height 36]
+                   }`)
         .join(', ');
 
       const filled = category.items
         .map(x => `${x}Filled`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Icons.${x} [width 64, height 64]`)
+        .map(x => `{ name = "${x}"
+                   , view = Icons.${x} [width 36, height 36]
+                   }`)
         .join(', ');
 
       const twoTone = category.items
         .map(x => `${x}TwoTone`)
         .filter(y => withSuccess.includes(y))
         .map(camelCase)
-        .map(x => `Icons.${x} [width 64, height 64]`)
+        .map(x => `{ name = "${x}"
+                   , view = Icons.${x} [width 36, height 36]
+                   }`)
         .join(', ');
 
       return `

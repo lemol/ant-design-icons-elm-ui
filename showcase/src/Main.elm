@@ -2,14 +2,27 @@ module Main exposing (main)
 
 import PlayStories
 import Stories
-import UIExplorer exposing (UIExplorerProgram, defaultConfig, explore, storiesOf)
-import Utils exposing (viewIcons)
+import UIExplorer exposing (Config, UIExplorerProgram, defaultConfig, explore, logoFromHtml, storiesOf)
+import Utils exposing (logo, viewIcons)
+
+
+config : Config {} () {}
+config =
+    { defaultConfig
+        | customHeader =
+            Just
+                { title = "Ant Design Icons for Elm UI"
+                , logo = logoFromHtml logo
+                , titleColor = Just "rgba(0, 0, 0, 0.85)"
+                , bgColor = Nothing
+                }
+    }
 
 
 main : UIExplorerProgram {} () {}
 main =
     explore
-        defaultConfig
+        config
         stories
 
 
