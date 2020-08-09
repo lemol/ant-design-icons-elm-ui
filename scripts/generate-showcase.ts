@@ -11,8 +11,8 @@ export async function generateStories(withSuccess: string[]) {
   const exposingList = 'ShowIcon, Category, allCategories';
 
   const imports = `
-import Ant.Element.Icon exposing (width, height)
-import Ant.Element.Icons as Icons
+import Ant.Icon exposing (width, height)
+import Ant.Icons as Icons
 import Element exposing (Element)
 `;
 

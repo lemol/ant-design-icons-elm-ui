@@ -8,8 +8,8 @@ module Stories exposing
     , allCategories
     )
 
-import Ant.Element.Icon exposing (height, width)
-import Ant.Element.Icons as Icons
+import Ant.Icon exposing (height, width)
+import Ant.Icons as Icons
 import Element exposing (Element)
 
 

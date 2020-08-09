@@ -1,7 +1,7 @@
 module Utils exposing (logo, viewIcons)
 
-import Ant.Element.Icon exposing (fill, height, width)
-import Ant.Element.Icons exposing (antDesignOutlined)
+import Ant.Icon exposing (fill, height, width)
+import Ant.Icons exposing (antDesignOutlined)
 import Element exposing (Element)
 import Element.Font as Font
 import Html exposing (Html)
@@ -44,7 +44,7 @@ viewIcons items =
     in
     Html.div
         []
-        [ Ant.Element.Icon.styleNode
+        [ Ant.Icon.styleNode
         , Element.layout [] viewItems
         ]
 

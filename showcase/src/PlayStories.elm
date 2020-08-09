@@ -1,7 +1,7 @@
 module PlayStories exposing (examples)
 
-import Ant.Element.Icon exposing (fill, height, rotate, spin, width)
-import Ant.Element.Icons as Icons
+import Ant.Icon exposing (fill, height, rotate, spin, width)
+import Ant.Icons as Icons
 import Element exposing (Element)
 import Html exposing (Html)
 import UIExplorer exposing (UI, storiesOf)
@@ -61,6 +61,6 @@ viewIcons items =
     in
     Html.div
         []
-        [ Ant.Element.Icon.styleNode
+        [ Ant.Icon.styleNode
         , Element.layout [] element
         ]

@@ -43,7 +43,7 @@ async function generateIcons() {
       const svgString = helpers.renderIconDefinitionToSVGElement(iconDef);
       const parsed = await SvgParser.parseSvg(prepareSvgString(svgString));
 
-      elmModuleToString(parsed.toElm(`Ant.Icons.${svgIdentifier}`));
+      elmModuleToString(parsed.toElm(`Ant.Icons.Svg.${svgIdentifier}`));
     } catch(error) {
       withErrors.push(svgIdentifier);
     }
@@ -61,15 +61,15 @@ async function generateIcons() {
     .join('\n  , ');
 
   const imports = `
-import Ant.Icons
+import Ant.Icon exposing (Attribute, icon)
+import Ant.Icons.Svg as Icons
 import Element exposing (Element)
-import Ant.Element.Icon exposing (Attribute, customIcon)
   `;
 
   const decls = withSuccess
     .map(svgIdentifier => {
       const attrs = svgIdentifier === 'LoadingOutlined'
-        ? `(Ant.Element.Icon.spin :: attrs)`
+        ? `(Ant.Icon.spin :: attrs)`
         : 'attrs';
 
       const iconDef = (allIconDefs as any)[svgIdentifier];
@@ -81,7 +81,7 @@ import Ant.Element.Icon exposing (Attribute, customIcon)
 -}
 ${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
 ${camelCase(svgIdentifier)} attrs =
-    customIcon ${attrs} Ant.Icons.${camelCase(svgIdentifier)}
+    icon ${attrs} Icons.${camelCase(svgIdentifier)}
     `;
     })
     .join('\n\n');
@@ -107,11 +107,11 @@ ${camelCase(svgIdentifier)} attrs =
     .join('\n');
 
   await promisify(fs.appendFile)(
-    path.resolve(__dirname, '../src/Ant/Element/Icons.elm'),
+    path.resolve(__dirname, '../src/Ant/Icons.elm'),
     `
 -- GENERATE BY ./scripts/generate.ts
 -- DO NOT EDIT IT MANUALLY
-module Ant.Element.Icons exposing
+module Ant.Icons exposing
   ( ${exposingList}
   )
 

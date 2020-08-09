@@ -1,7 +1,7 @@
-module Ant.Element.Icon exposing
-    ( Attribute, SvgIcon, customIcon
+module Ant.Icon exposing
+    ( Attribute, SvgIcon, icon
     , fill, height, width, rotate, spin, style, twoToneColor
-    , customIconBase, styleNode
+    , iconBase, styleNode
     )
 
 {-|
@@ -9,7 +9,7 @@ module Ant.Element.Icon exposing
 
 # Basics
 
-@docs Attribute, SvgIcon, customIcon
+@docs Attribute, SvgIcon, icon
 
 
 # Attributes
@@ -19,7 +19,7 @@ module Ant.Element.Icon exposing
 
 # Utils
 
-@docs customIconBase, styleNode
+@docs iconBase, styleNode
 
 -}
 
@@ -70,14 +70,14 @@ defaultProps =
 
 
 {-| -}
-customIcon : List (Attribute msg) -> SvgIcon msg -> Element msg
-customIcon =
-    customIconBase {}
+icon : List (Attribute msg) -> SvgIcon msg -> Element msg
+icon =
+    iconBase {}
 
 
 {-| -}
-customIconBase : {} -> List (Attribute msg) -> SvgIcon msg -> Element msg
-customIconBase theme attrs svgIcon =
+iconBase : {} -> List (Attribute msg) -> SvgIcon msg -> Element msg
+iconBase theme attrs svgIcon =
     let
         props =
             fromAttributes attrs
