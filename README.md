@@ -66,7 +66,6 @@ myIcons =
     ]
 ```
 
-
 ## Install
 
 ```bash
@@ -88,7 +87,7 @@ elm install lemol/ant-design-icons-elm-ui
 
 * https://github.com/ant-design/ant-design-icons
 
-* https://package.elm-lang.org/packages/lemol/ant-design-icons-elm/latest
+* `elm/html` version: [lemol/ant-design-icons-elm](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm/latest)
 
 
 ## License
