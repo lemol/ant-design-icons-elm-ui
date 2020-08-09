@@ -83,11 +83,11 @@ elm install lemol/ant-design-icons-elm-ui
 
 ## Resources
 
+* `elm/html` version: [lemol/ant-design-icons-elm](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm/latest)
+
 * https://ant.design/components/icon/
 
 * https://github.com/ant-design/ant-design-icons
-
-* `elm/html` version: [lemol/ant-design-icons-elm](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm/latest)
 
 
 ## License
