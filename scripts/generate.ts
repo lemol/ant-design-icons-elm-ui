@@ -74,10 +74,11 @@ import Element exposing (Element)
 
       const iconDef = (allIconDefs as any)[svgIdentifier];
       const svgString = prepareSvgString(helpers.renderIconDefinitionToSVGElement(iconDef));
-      const svgEncoded = svgToDataURL(svgString.replace("<svg", '<svg width="24"'));
+      // enable this after the issue https://discourse.elm-lang.org/t/publishing-a-package-with-api-documentation-512kb/1562 is solved
+      // const svgEncoded = svgToDataURL(svgString.replace("<svg", '<svg width="32" height="32"'));
 
       return `
-{-| ![${svgIdentifier}](${svgEncoded} "${svgIdentifier} preview")
+{-|
 -}
 ${camelCase(svgIdentifier)} : List (Attribute msg) -> Element msg
 ${camelCase(svgIdentifier)} attrs =

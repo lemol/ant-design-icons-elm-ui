@@ -12,7 +12,7 @@ This packages exposes all SVG icons from [ant-design](https://ant.design/compone
 It is the implementation for [mdgriffith/elm-ui](https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/)
 of [ant-design-icons](https://github.com/ant-design/ant-design-icons/tree/master/packages).
 
-Try this live example on Ellie or navigate to the [complete showcase](https://ant-design-icons-elm-ui.vercel.app)!
+Try the below example [on Ellie](https://ellie-app.com/new) or navigate to the [complete showcase](https://ant-design-icons-elm-ui.vercel.app)!
 
 ```elm
 module Main exposing (main)
@@ -57,6 +57,7 @@ myIcons =
         [ width 24
         , height 24
         , rotate 180
+        , fill (Element.rgb 1 0 1)
         ]
     , Icons.loadingOutlined
         [ width 24
