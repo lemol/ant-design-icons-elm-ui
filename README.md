@@ -3,9 +3,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Elm package](https://img.shields.io/elm-package/v/lemol/ant-design-icons-elm-ui.svg)](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm-ui/latest/)
 
-> 📦 **[Package documentation](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm-ui/latest)**
+> **📦 [Package documentation](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm-ui/latest)**
 
-> 🎬 **[Showcase](https://ant-design-icons-elm-ui.vercel.app)**
+> **🎬 [Showcase](https://ant-design-icons-elm-ui.vercel.app)**
 
 This packages exposes all SVG icons from [ant-design](https://ant.design/components/icon/) as `Element msg` view functions.
 It is the implementation for [mdgriffith/elm-ui](https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/)
@@ -16,8 +16,8 @@ Try this live example on Ellie or navigate to the [complete showcase](https://an
 ```elm
 module Main exposing (main)
 
-import Ant.Element.Icon exposing (fill, height, rotate, spin, width)
-import Ant.Element.Icons as Icons
+import Ant.Icon exposing (fill, height, rotate, spin, width)
+import Ant.Icons as Icons
 import Element exposing (Element)
 import Html exposing (Html)
 
@@ -25,8 +25,12 @@ import Html exposing (Html)
 
 main : Html msg
 main =
-    Element.layout []
-        myIcons
+    Element.column
+        []
+        [ Ant.Icon.styleNode
+        , myIcons
+        ]
+        |> Element.layout []
 
 
 myIcons : List (Element msg)
@@ -86,4 +90,4 @@ elm install lemol/ant-design-icons-elm-ui
 
 ## License
 
-MIT
+MIT License
