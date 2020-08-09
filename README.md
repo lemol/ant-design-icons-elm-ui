@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Elm package](https://img.shields.io/elm-package/v/lemol/ant-design-icons-elm-ui.svg)](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm-ui/latest/)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/lemol/ant-design-icons-elm-ui)
 
 > **📦 [Package documentation](https://package.elm-lang.org/packages/lemol/ant-design-icons-elm-ui/latest)**
 
@@ -78,6 +79,7 @@ elm install lemol/ant-design-icons-elm-ui
 
 * You can find @lemol on [Elm Slack](https://elmlang.slack.com/)
 
+* [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/lemol/ant-design-icons-elm-ui)
 
 ## Resources
 
