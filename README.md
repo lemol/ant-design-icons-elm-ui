@@ -75,7 +75,7 @@ elm install lemol/ant-design-icons-elm-ui
 
 ## Contributing
 
-* Bug fixes, issues reporting and API design are welcome
+* Bug fixes, issues reporting and suggestions are welcome
 
 * You can find @lemol on [Elm Slack](https://elmlang.slack.com/)
 
