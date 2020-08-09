@@ -8,7 +8,7 @@
 
 > **🎬 [Showcase](https://ant-design-icons-elm-ui.vercel.app)**
 
-This packages exposes all SVG icons from [ant-design](https://ant.design/components/icon/) as `Element msg` view functions.
+This packages exposes all SVG icons from [ant-design](https://ant.design/components/icon/) as `List (Attribute msg) -> Element msg` functions.
 It is the implementation for [mdgriffith/elm-ui](https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/)
 of [ant-design-icons](https://github.com/ant-design/ant-design-icons/tree/master/packages).
 
