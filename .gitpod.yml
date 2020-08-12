@@ -3,7 +3,7 @@ tasks:
     command: yarn showcase
 
 ports:
-  - port: 123
+  - port: 1234
     onOpen: open-preview
 
 vscode:
